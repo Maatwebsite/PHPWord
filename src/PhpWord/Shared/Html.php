@@ -12,7 +12,7 @@
  *
  * @link        https://github.com/PHPOffice/PHPWord
  * @copyright   2010-2014 PHPWord contributors
- * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
+ * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3a
  */
 
 namespace PhpOffice\PhpWord\Shared;
@@ -197,6 +197,7 @@ class Html
     {
         $styles['paragraph'] = self::parseInlineStyle($node, $styles['paragraph']);
         $newElement = $element->addTextRun($styles['paragraph']);
+        $newElement->addTextBreak(1);
 
         return $newElement;
     }
