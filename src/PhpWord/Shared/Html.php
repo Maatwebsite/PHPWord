@@ -111,6 +111,7 @@ class Html
         $nodes = array(
                               // $method        $node   $element    $styles     $data   $argument1      $argument2
             'p'         => array('Paragraph',   $node,  $element,   $styles,    null,   null,           null),
+            'br'        => array('Linebreak',   $node,  $element,   $styles,    null,   null,           null),
             'h1'        => array('Heading',     null,   $element,   $styles,    null,   'Heading1',     null),
             'h2'        => array('Heading',     null,   $element,   $styles,    null,   'Heading2',     null),
             'h3'        => array('Heading',     null,   $element,   $styles,    null,   'Heading3',     null),
@@ -197,8 +198,24 @@ class Html
     {
         $styles['paragraph'] = self::parseInlineStyle($node, $styles['paragraph']);
         $newElement = $element->addTextRun($styles['paragraph']);
+        $newElement->addTextBreak(1);
 
         return $newElement;
+    }
+
+    /**
+     * Parse paragraph node
+     *
+     * @param \DOMNode $node
+     * @param \PhpOffice\PhpWord\Element\AbstractContainer $element
+     * @param array &$styles
+     * @return \PhpOffice\PhpWord\Element\TextRun
+     */
+    private static function parseLinebreak($node, $element, &$styles)
+    {
+        $element->addTextBreak(1);
+
+        return $element;
     }
 
     /**
