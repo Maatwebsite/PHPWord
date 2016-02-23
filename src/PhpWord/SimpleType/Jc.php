@@ -11,16 +11,20 @@
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
  * @link        https://github.com/PHPOffice/PHPWord
- * @copyright   2010-2014 PHPWord contributors
+ * @copyright   2010-2015 PHPWord contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
 namespace PhpOffice\PhpWord\SimpleType;
 
+use Zend\Validator\InArray;
+
 /**
  * Horizontal Alignment Type.
  *
  * @since 0.13.0
+ *
+ * @codeCoverageIgnore
  */
 final class Jc
 {
@@ -36,22 +40,45 @@ final class Jc
     const THAI_DISTRIBUTE = 'thaiDistribute';
 
     /**
+     * @deprecated 0.13.0 Use `START` instead.
+     */
+    const LEFT = 'left';
+    /**
+     * @deprecated 0.13.0 Use `END` instead.
+     */
+    const RIGHT = 'right';
+    /**
+     * @deprecated 0.13.0 Use `BOTH` instead.
+     */
+    const JUSTIFY = 'justify';
+
+    /**
      * @since 0.13.0
      *
-     * @return string[]
+     * @return \Zend\Validator\InArray
      */
-    final public static function getAllowedValues()
+    final public static function getValidator()
     {
-        return array(
-            self::START,
-            self::CENTER,
-            self::END,
-            self::MEDIUM_KASHIDA,
-            self::DISTRIBUTE,
-            self::NUM_TAB,
-            self::HIGH_KASHIDA,
-            self::LOW_KASHIDA,
-            self::THAI_DISTRIBUTE,
+        // todo: consider caching validator instances.
+        return new InArray(
+            array (
+                'haystack' => array(
+                    self::START,
+                    self::CENTER,
+                    self::END,
+                    self::BOTH,
+                    self::MEDIUM_KASHIDA,
+                    self::DISTRIBUTE,
+                    self::NUM_TAB,
+                    self::HIGH_KASHIDA,
+                    self::LOW_KASHIDA,
+                    self::THAI_DISTRIBUTE,
+                    self::LEFT,
+                    self::RIGHT,
+                    self::JUSTIFY,
+                ),
+                'strict'   => InArray::COMPARE_STRICT,
+            )
         );
     }
 }

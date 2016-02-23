@@ -53,32 +53,27 @@ With PHPWord, you can create DOCX, ODT, or RTF documents dynamically using your 
 PHPWord requires the following:
 
 - PHP 5.3+
-- [Zip extension](http://php.net/manual/en/book.zip.php)
 - [XML Parser extension](http://www.php.net/manual/en/xml.installation.php)
+- [Zend\Validator component](http://framework.zend.com/manual/current/en/modules/zend.validator.html)
+- [Zip extension](http://php.net/manual/en/book.zip.php) (optional, used to write DOCX and ODT)
 - [GD extension](http://php.net/manual/en/book.image.php) (optional, used to add images)
 - [XMLWriter extension](http://php.net/manual/en/book.xmlwriter.php) (optional, used to write DOCX and ODT)
 - [XSL extension](http://php.net/manual/en/book.xsl.php) (optional, used to apply XSL style sheet to template )
-- [dompdf](https://github.com/dompdf/dompdf) (optional, used to write PDF)
+- [dompdf library](https://github.com/dompdf/dompdf) (optional, used to write PDF)
 
 ## Installation
 
-It is recommended that you install the PHPWord library [through composer](http://getcomposer.org/). To do so, add
-the following lines to your ``composer.json``.
+PHPWord is installed via [Composer](https://getcomposer.org/).
+You just need to [add dependency](https://getcomposer.org/doc/04-schema.md#package-links>) on PHPWord into your package.
+
+Example:
 
 ```json
 {
     "require": {
-       "phpoffice/phpword": "dev-master"
+       "phpoffice/phpword": "v0.13.*"
     }
 }
-```
-
-Alternatively, you can download the latest release from the [releases page](https://github.com/PHPOffice/PHPWord/releases).
-In this case, you will have to register the autoloader.
-
-```php
-require_once 'path/to/PhpWord/src/PhpWord/Autoloader.php';
-\PhpOffice\PhpWord\Autoloader::register();
 ```
 
 ## Getting started
@@ -87,8 +82,7 @@ The following is a basic usage example of the PHPWord library.
 
 ```php
 <?php
-require_once 'src/PhpWord/Autoloader.php';
-\PhpOffice\PhpWord\Autoloader::register();
+require_once 'bootstrap.php';
 
 // Creating the new document...
 $phpWord = new \PhpOffice\PhpWord\PhpWord();

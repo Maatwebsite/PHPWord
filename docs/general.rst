@@ -13,8 +13,7 @@ folder <https://github.com/PHPOffice/PHPWord/tree/master/samples/>`__.
 .. code-block:: php
 
     <?php
-    require_once 'src/PhpWord/Autoloader.php';
-    \PhpOffice\PhpWord\Autoloader::register();
+    require_once 'bootstrap.php';
 
     // Creating the new document...
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
