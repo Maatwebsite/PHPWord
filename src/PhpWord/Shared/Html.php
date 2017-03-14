@@ -341,13 +341,23 @@ class Html
     {
         $cNodes = $node->childNodes;
         if (count($cNodes) > 0) {
-            $text = '';
+            $text = [];
+
+            $listItemRun = $element->addListItemRun($data['listdepth'], $styles['list'], $styles['paragraph']);
+
+            $fontStyle = $styles['font'];
             foreach ($cNodes as $cNode) {
                 if ($cNode->nodeName == '#text') {
-                    $text = $cNode->nodeValue;
+                    $listItemRun->addText($cNode->nodeValue, $fontStyle);
+                } elseif($cNode->nodeName == 'em') {
+                    $fontStyle['italic'] = true;
+                    $listItemRun->addText($cNode->nodeValue, $fontStyle);
+                }
+                elseif($cNode->nodeName == 'strong') {
+                    $fontStyle['bold'] = true;
+                    $listItemRun->addText($cNode->nodeValue, $fontStyle);
                 }
             }
-            $element->addListItem($text, $data['listdepth'], $styles['font'], $styles['list'], $styles['paragraph']);
         }
 
         return null;
