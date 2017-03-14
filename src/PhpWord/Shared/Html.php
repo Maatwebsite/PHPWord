@@ -345,15 +345,16 @@ class Html
 
             $listItemRun = $element->addListItemRun($data['listdepth'], $styles['list'], $styles['paragraph']);
 
-            $fontStyle = $styles['font'];
             foreach ($cNodes as $cNode) {
                 if ($cNode->nodeName == '#text') {
-                    $listItemRun->addText($cNode->nodeValue, $fontStyle);
+                    $listItemRun->addText($cNode->nodeValue, $styles['font']);
                 } elseif($cNode->nodeName == 'em') {
+                    $fontStyle = $styles['font'];
                     $fontStyle['italic'] = true;
                     $listItemRun->addText($cNode->nodeValue, $fontStyle);
                 }
                 elseif($cNode->nodeName == 'strong') {
+                    $fontStyle = $styles['font'];
                     $fontStyle['bold'] = true;
                     $listItemRun->addText($cNode->nodeValue, $fontStyle);
                 }
